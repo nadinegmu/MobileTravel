@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">MobileTravel</string>
     <string name="action_settings">Settings</string>
+    <string name="von">von</string>
+    <string name="nach">nach</string>
+    <string name="suche">suche</string>
+    <string name="title_activity_connections">Connections</string>
+    <string name="large_text">
+        "here are the connections going to be.\n\n"
+    </string>
 </resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MobileTravel</string>
+    <string name="nach">to</string>
+    <string name="von">from</string>
+    <string name="suche">search</string>
+</resources>
