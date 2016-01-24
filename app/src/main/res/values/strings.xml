@@ -9,4 +9,15 @@
         "here are the connections going to be.\n\n"
     </string>
     <string name="Test">Test</string>
+    <string name="About">About</string>
+    <string name="title_activity_about">AboutActivity</string>
+    <string name="about_headline">Unternehmen</string>
+    <string name="about_text">Gruppenarbeit</string>
+    <string name="btnArrivalsText">Ankunft</string>
+    <string name="btnDepartureText">Abfahrt</string>
+    <string name="btnDateDefaultText">Datum</string>
+    <string name="btnTimeDefaultText">Zeit</string>
+    <string name="refreshDateTimeButtonText">Refresh Time</string>
+    <string name="mainOppositeDirectionText">Gegenrichtung</string>
+    <string name="mainSearchConnectionsText">Suche</string>
 </resources>

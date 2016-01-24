@@ -5,4 +5,12 @@
     <string name="von">from</string>
     <string name="suche">search</string>
     <string name="Test">Test</string>
+    <string name="About">About</string>
+    <string name="about_headline">Company History</string>
+    <string name="about_text">Group Project</string>
+    <string name="btnArrivalsText">Ankunft</string>
+    <string name="btnDepartureText">Abfahrt</string>
+    <string name="btnDateDefaultText">Datum</string>
+    <string name="btnTimeDefaultText">Zeit</string>
+    <string name="mainSearchConnectionsText">Suche</string>
 </resources>
