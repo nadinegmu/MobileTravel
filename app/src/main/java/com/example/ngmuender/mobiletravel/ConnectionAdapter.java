@@ -56,6 +56,9 @@ public class ConnectionAdapter extends BaseAdapter {
         TextView connectionDurationTextView = (TextView) convertView.findViewById(R.id.connection_duration);
         connectionDurationTextView.setText(connection.getDuration() +"");
 
+        TextView connectionTransfersTextView = (TextView) convertView.findViewById(R.id.connection_transfers);
+        connectionTransfersTextView.setText(connection.getTransfers() +"");
+
         return convertView;
     }
 

@@ -14,7 +14,6 @@
         android:layout_marginRight="8dp"
         android:layout_alignParentTop="true"
         android:gravity="left"
-        android:background="#aaa"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -24,8 +23,8 @@
         android:layout_marginRight="8dp"
         android:layout_toRightOf="@id/connection_from"
         android:gravity="left"
-        android:background="#aaa"
         android:textAppearance="?android:attr/textAppearanceSmall" />
+
 
     <TextView
         android:id="@+id/connection_duration"
@@ -33,7 +32,14 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/connection_to"
         android:gravity="left"
-        android:background="#aaa"
+        android:layout_marginRight="10dp"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
+    <TextView
+        android:id="@+id/connection_transfers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/connection_duration"
+        android:gravity="left"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 </RelativeLayout>

@@ -3,29 +3,25 @@ package com.example.ngmuender.mobiletravel;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
+import com.example.ngmuender.mobiletravel.dummy.ConnectionsRequest;
+
 import java.util.List;
 
-import ch.schoeb.opendatatransport.IOpenTransportRepository;
-import ch.schoeb.opendatatransport.OpenTransportRepositoryFactory;
 import ch.schoeb.opendatatransport.model.Connection;
-import ch.schoeb.opendatatransport.model.ConnectionList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -68,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         btnSearch = (Button) findViewById(R.id.btnSearch);
         btnSearch.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                LoadConnections();
+                searchConnections();
             }
         });
         
@@ -127,47 +123,21 @@ public class MainActivity extends AppCompatActivity {
         timePicker.show();
     }
 
-    private void LoadConnections() {
-        new LoaderTask().execute();
-    }
-
-    private class LoaderTask extends AsyncTask<Void, Void, ConnectionList> {
-
-        public EditText txtEditStationVon;
-        public String stationVon;
-
-        public EditText txtEditStationNach;
-        public String stationNach;
-
-        @Override
-        protected void onPreExecute() {
-            txtEditStationVon = (EditText) findViewById(R.id.stationVon);
-            stationVon = txtEditStationVon.getText().toString();
-            txtEditStationNach = (EditText) findViewById(R.id.stationNach);
-            stationNach = txtEditStationNach.getText().toString();
-        }
-
-        @Override
-        protected ConnectionList doInBackground(Void... params) {
-            // Get Repository
-            IOpenTransportRepository repo = OpenTransportRepositoryFactory.CreateOnlineOpenTransportRepository();
+    private void searchConnections() {
+        Intent i = new Intent(MainActivity.this,ConnectionListActivity.class);
+        EditText txtEditStationVon = (EditText) findViewById(R.id.stationVon);
+        EditText txtEditStationNach = (EditText) findViewById(R.id.stationNach);
 
 
-            ConnectionList connectionList = repo.searchConnections(stationVon, stationNach);
+        ConnectionsRequest req = new ConnectionsRequest(
+                txtEditStationVon.getText().toString(),
+                txtEditStationNach.getText().toString(),
+                "",
+                btnDate.getText().toString(),
+                btnTime.getText().toString(),
+                true);
 
-            return connectionList;
-        }
-
-
-        @Override
-        protected void onPostExecute(ConnectionList connectionList) {
-            Log.d("ConnectionList", connectionList.toString());
-            ConnectionAdapter adapter = new ConnectionAdapter(MainActivity.this,connectionList.getConnections());
-
-            ListView lv = (ListView) findViewById(R.id.listView);
-            lv.setAdapter(adapter);
-
-
-        }
+        i.putExtra("request",req);
+        startActivity(i);
     }
 }
