@@ -25,12 +25,27 @@
         android:gravity="left"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
+    <TextView
+        android:id="@+id/connection_departure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/connection_to"
+        android:gravity="left"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/connection_arrival"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/connection_departure"
+        android:gravity="left"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
         android:id="@+id/connection_duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/connection_to"
+        android:layout_toRightOf="@id/connection_arrival"
         android:gravity="left"
         android:layout_marginRight="10dp"
         android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -42,4 +57,7 @@
         android:layout_toRightOf="@id/connection_duration"
         android:gravity="left"
         android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
+
 </RelativeLayout>

@@ -20,4 +20,7 @@
     <string name="refreshDateTimeButtonText">Refresh Time</string>
     <string name="mainOppositeDirectionText">Gegenrichtung</string>
     <string name="mainSearchConnectionsText">Suche</string>
+    <string name="action_favorite">Favorites</string>
+    <string name="title_activity_connection_detail">ConnectionDetailActivity</string>
+    <string name="via">via</string>
 </resources>

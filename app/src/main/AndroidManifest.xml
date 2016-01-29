@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ngmuender.mobiletravel">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ConnectionListActivity"
+            android:name=".ConnectionsActivity"
             android:label="@string/title_activity_connections"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -44,9 +47,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.ngmuender.mobiletravel.MainActivity" />
         </activity>
+        <activity
+            android:name=".ConnectionDetailActivity"
+            android:label="@string/title_activity_connection_detail"
+            android:parentActivityName=".ConnectionsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.ngmuender.mobiletravel.ConnectionsActivity" />
+        </activity>
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
 </manifest>

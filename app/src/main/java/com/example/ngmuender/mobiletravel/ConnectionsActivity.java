@@ -13,7 +13,7 @@ import ch.schoeb.opendatatransport.IOpenTransportRepository;
 import ch.schoeb.opendatatransport.OpenTransportRepositoryFactory;
 import ch.schoeb.opendatatransport.model.ConnectionList;
 
-public class ConnectionListActivity extends AppCompatActivity {
+public class ConnectionsActivity extends AppCompatActivity {
 
     private ConnectionsRequest req;
 
@@ -63,7 +63,7 @@ public class ConnectionListActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(ConnectionList connectionList) {
             Log.d("ConnectionList", connectionList.toString());
-            ConnectionAdapter adapter = new ConnectionAdapter(ConnectionListActivity.this,connectionList.getConnections());
+            ConnectionAdapter adapter = new ConnectionAdapter(ConnectionsActivity.this,connectionList.getConnections());
 
             ListView lv = (ListView) findViewById(R.id.listView);
             lv.setAdapter(adapter);

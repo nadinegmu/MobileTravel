@@ -26,13 +26,18 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/von"
-            android:id="@+id/textView_from" />
+            android:id="@+id/textViewFrom" />
 
-        <EditText
-            android:layout_width="wrap_content"
+        <AutoCompleteTextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/stationVon"
-            android:layout_weight="1" />
+            android:id="@+id/stationFrom"
+            android:inputType="textNoSuggestions|textAutoComplete"
+            android:layout_weight="1"
+            android:imeOptions="actionNext"
+            android:selectAllOnFocus="true"
+            android:completionThreshold="1" />
+
 
     </LinearLayout>
 
@@ -47,13 +52,43 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/nach"
-            android:id="@+id/textView" />
+            android:id="@+id/textViewTo" />
 
-        <EditText
-            android:layout_width="wrap_content"
+        <AutoCompleteTextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/stationNach"
-            android:layout_weight="1" />
+            android:id="@+id/stationTo"
+            android:inputType="textNoSuggestions|textAutoComplete"
+            android:layout_weight="1"
+            android:imeOptions="actionNext"
+            android:selectAllOnFocus="true"
+            android:completionThreshold="1" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" >
+
+        <TextView
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/via"
+            android:id="@+id/textViewVia" />
+
+        <AutoCompleteTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/stationVia"
+            android:inputType="textNoSuggestions|textAutoComplete"
+            android:layout_weight="1"
+            android:imeOptions="actionNext"
+            android:selectAllOnFocus="true"
+            android:completionThreshold="1" />
 
     </LinearLayout>
 

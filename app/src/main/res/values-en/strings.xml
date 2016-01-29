@@ -13,4 +13,6 @@
     <string name="btnDateDefaultText">Datum</string>
     <string name="btnTimeDefaultText">Zeit</string>
     <string name="mainSearchConnectionsText">Suche</string>
+    <string name="action_favorite">Favorites</string>
+    <string name="via">via</string>
 </resources>

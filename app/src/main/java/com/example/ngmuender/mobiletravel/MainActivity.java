@@ -2,47 +2,68 @@ package com.example.ngmuender.mobiletravel;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
 import com.example.ngmuender.mobiletravel.dummy.ConnectionsRequest;
 
-import java.util.List;
+import java.util.ArrayList;
 
-import ch.schoeb.opendatatransport.model.Connection;
+import ch.schoeb.opendatatransport.IOpenTransportRepository;
+import ch.schoeb.opendatatransport.OpenTransportRepositoryFactory;
+import ch.schoeb.opendatatransport.model.Station;
+import ch.schoeb.opendatatransport.model.StationList;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private CoordinatorLayout coordinatorLayout;
 
+    private AutoCompleteTextView currentAutoCompleteTV;
+    private AutoCompleteTextView autoTxtViewFrom;
+    private AutoCompleteTextView autoTxtViewTo;
+    private AutoCompleteTextView autoTxtViewVia;
+
+    public Context mainContext;
+
+    public ArrayList<String> proposalStations;
+    public String searchString;
+
 
     private DateFormatter dateformatter = new DateFormatter();
     private Button btnDate;
     private Button btnTime;
     private ToggleButton btnToggle;
+    private boolean isArrivalTime = false;
 
     private Button btnSearch;
 
-    private List<Connection> connections;
+    public IOpenTransportRepository repo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
+
+        repo = OpenTransportRepositoryFactory.CreateOnlineOpenTransportRepository();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -67,7 +88,75 @@ public class MainActivity extends AppCompatActivity {
                 searchConnections();
             }
         });
-        
+
+        mainContext = this;
+        proposalStations = new ArrayList<String>();
+
+        autoTxtViewFrom = (AutoCompleteTextView) findViewById(R.id.stationFrom);
+        autoTxtViewFrom.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                currentAutoCompleteTV = autoTxtViewFrom;
+                proposeStations(s, start, before, count);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        autoTxtViewTo = (AutoCompleteTextView) findViewById(R.id.stationTo);
+        autoTxtViewTo.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                currentAutoCompleteTV = autoTxtViewTo;
+                proposeStations(s, start, before, count);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        autoTxtViewVia = (AutoCompleteTextView) findViewById(R.id.stationVia);
+        autoTxtViewVia.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                currentAutoCompleteTV = autoTxtViewVia;
+                proposeStations(s, start, before, count);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        btnToggle = (ToggleButton) findViewById(R.id.togBtnDepArr);
+        btnToggle.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  isArrivalTime = btnToggle.isChecked();
+              }
+          }
+        );
     }
 
     @Override
@@ -124,20 +213,71 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void searchConnections() {
-        Intent i = new Intent(MainActivity.this,ConnectionListActivity.class);
-        EditText txtEditStationVon = (EditText) findViewById(R.id.stationVon);
-        EditText txtEditStationNach = (EditText) findViewById(R.id.stationNach);
+        Intent i = new Intent(MainActivity.this,ConnectionsActivity.class);
 
+        autoTxtViewFrom = (AutoCompleteTextView) findViewById(R.id.stationFrom);
+        autoTxtViewTo = (AutoCompleteTextView) findViewById(R.id.stationTo);
+        autoTxtViewVia = (AutoCompleteTextView) findViewById(R.id.stationVia);
 
         ConnectionsRequest req = new ConnectionsRequest(
-                txtEditStationVon.getText().toString(),
-                txtEditStationNach.getText().toString(),
-                "",
+                autoTxtViewFrom.getText().toString(),
+                autoTxtViewTo.getText().toString(),
+                autoTxtViewVia.getText().toString(),
                 btnDate.getText().toString(),
                 btnTime.getText().toString(),
-                true);
+                isArrivalTime);
 
         i.putExtra("request",req);
         startActivity(i);
     }
+
+    private void proposeStations(CharSequence s, int start, int before, int count) {
+        searchString = s.toString();
+        new StationLoaderTask().execute();
+     }
+
+    public class StationLoaderTask extends AsyncTask<Void, Void, Void> {
+        private Exception fetchStationListException;
+
+        private AutoCompleteTextView autoCompleteTV;
+
+        @Override
+        protected void onPreExecute() {
+            autoCompleteTV = currentAutoCompleteTV;
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            proposalStations.clear();
+            try
+            {
+                StationList stationList = repo.findStations(searchString);
+
+                if (stationList.getStations().size() > 0) {
+                    for (Station s : stationList.getStations()) {
+                        proposalStations.add(s.getName());
+                    }
+                }
+            }
+            catch(Exception e){
+                this.fetchStationListException = e;
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            if(fetchStationListException != null){
+                return;
+            }
+
+            ArrayAdapter adaptorAutoComplete = new ArrayAdapter<String>(mainContext, android.R.layout.simple_dropdown_item_1line, new ArrayList<String>(proposalStations));
+            autoCompleteTV.setAdapter(adaptorAutoComplete);
+            adaptorAutoComplete.notifyDataSetChanged();
+        }
+    }
+
 }

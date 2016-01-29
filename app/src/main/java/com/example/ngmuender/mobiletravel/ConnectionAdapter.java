@@ -59,6 +59,13 @@ public class ConnectionAdapter extends BaseAdapter {
         TextView connectionTransfersTextView = (TextView) convertView.findViewById(R.id.connection_transfers);
         connectionTransfersTextView.setText(connection.getTransfers() +"");
 
+        TextView connectionDepartureTextView = (TextView) convertView.findViewById(R.id.connection_departure);
+        connectionTransfersTextView.setText(connection.getFrom().getDeparture() +"");
+
+        TextView connectionArrivalTextView = (TextView) convertView.findViewById(R.id.connection_arrival);
+        connectionTransfersTextView.setText(connection.getTo().getArrival() +"");        
+
+
         return convertView;
     }
 
