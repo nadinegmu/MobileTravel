@@ -7,30 +7,13 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin" >
 
-    <TextView
-        android:id="@+id/connection_from"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="8dp"
-        android:layout_alignParentTop="true"
-        android:gravity="left"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/connection_to"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="8dp"
-        android:layout_toRightOf="@id/connection_from"
-        android:gravity="left"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
         android:id="@+id/connection_departure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/connection_to"
         android:gravity="left"
+        android:layout_marginRight="10dp"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -39,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/connection_departure"
         android:gravity="left"
+        android:layout_marginRight="10dp"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView

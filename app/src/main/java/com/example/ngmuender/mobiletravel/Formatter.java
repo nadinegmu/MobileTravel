@@ -4,45 +4,49 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
-public class DateFormatter {
-    private Calendar cal = Calendar.getInstance();
+public class Formatter {
+    private GregorianCalendar cal = new GregorianCalendar();
 
-    public String GetDateNow() {
-        return GetStringFromDate(new Date());
+    public String getCurrentDate() {
+        return formatDateToString(new Date());
     }
-    public String GetTimeNow() {
-        return GetStringFromTime(new Date());
+    public String getCurrentTime() {
+        return formatDateToTimeString(new Date());
     }
-    public String GetTimeFromDate(String dateString) { return GetStringFromTime(dateString); }
+    public String formatDateStringToTimeString(String timestamp) {
 
-    private String GetStringFromDate(Date date) {
+        return formatDateToTimeString(timestamp); }
+
+    public String formatDateToString(Date date) {
         SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy");
         return ft.format(date);
     }
 
-    private String GetStringFromTime(Date date) {
+    public String formatDateToTimeString(Date date) {
         SimpleDateFormat ft = new SimpleDateFormat ("HH:mm");
         return ft.format(date);
     }
-    private String GetStringFromTime(String date) {
+    private String formatDateToTimeString(String date) {
         if (date == null) {
             return null;
         }
         SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd'T'HH:mm:ssZ");
+        String localPattern = ft.toLocalizedPattern();
         Date d = null;
         try {
             d = ft.parse(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return GetStringFromTime(d);
+        return formatDateToTimeString(d);
     }
 
     public String GetDateFormat(int day, int month, int year) {
         cal.setTimeInMillis(0);
         cal.set(year, month, day, 0, 0, 0);
-        return GetStringFromDate((Date)cal.getTime());
+        return formatDateToString((Date) cal.getTime());
     }
 
     public int GetDay() {
@@ -60,5 +64,19 @@ public class DateFormatter {
     }
     public int GetMinute() {
         return  cal.get(Calendar.MINUTE);
+    }
+
+    public String formatDuration(String duration) {
+        if (duration == "") {
+            return "";
+        }
+        String[] splitDuration = duration.split("d");
+        if (Integer.parseInt(splitDuration[0]) > 0) {
+            return "+" + Integer.parseInt(splitDuration[0]);
+        }
+        else {
+            String[] splitTimeDuration = splitDuration[1].split(":");
+            return Integer.parseInt(splitTimeDuration[0]) + ":" + splitTimeDuration[1];
+        }
     }
 }

@@ -45,25 +45,25 @@ public class ConnectionAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.connection_list_item, parent, false);
         }
 
+        Formatter formatter = new Formatter();
         Connection connection = (Connection) getItem(position);
 
-        TextView connectionFromTextView = (TextView) convertView.findViewById(R.id.connection_from);
-        connectionFromTextView.setText(connection.getFrom().getStation().getName() +"");
 
-        TextView connectionToTextView = (TextView) convertView.findViewById(R.id.connection_to);
-        connectionToTextView.setText(connection.getTo().getStation().getName() +"");
+        TextView connectionDepartureTextView = (TextView) convertView.findViewById(R.id.connection_departure);
+        connectionDepartureTextView.setText(formatter.formatDateStringToTimeString(connection.getFrom().getDeparture()));
+
+        TextView connectionArrivalTextView = (TextView) convertView.findViewById(R.id.connection_arrival);
+        connectionArrivalTextView.setText(formatter.formatDateStringToTimeString(connection.getTo().getArrival()));
 
         TextView connectionDurationTextView = (TextView) convertView.findViewById(R.id.connection_duration);
-        connectionDurationTextView.setText(connection.getDuration() +"");
+        connectionDurationTextView.setText(formatter.formatDuration(connection.getDuration()));
 
         TextView connectionTransfersTextView = (TextView) convertView.findViewById(R.id.connection_transfers);
         connectionTransfersTextView.setText(connection.getTransfers() +"");
 
-        TextView connectionDepartureTextView = (TextView) convertView.findViewById(R.id.connection_departure);
-        connectionTransfersTextView.setText(connection.getFrom().getDeparture() +"");
 
-        TextView connectionArrivalTextView = (TextView) convertView.findViewById(R.id.connection_arrival);
-        connectionTransfersTextView.setText(connection.getTo().getArrival() +"");        
+
+
 
 
         return convertView;

@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     public String searchString;
 
 
-    private DateFormatter dateformatter = new DateFormatter();
+    private Formatter dateformatter = new Formatter();
     private Button btnDate;
     private Button btnTime;
     private ToggleButton btnToggle;
