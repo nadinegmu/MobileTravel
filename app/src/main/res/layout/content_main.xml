@@ -18,25 +18,98 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="35dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/von"
-            android:id="@+id/textViewFrom" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <AutoCompleteTextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/stationFrom"
-            android:inputType="textNoSuggestions|textAutoComplete"
-            android:layout_weight="1"
-            android:imeOptions="actionNext"
-            android:selectAllOnFocus="true"
-            android:completionThreshold="1" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left">
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/von"
+                    android:id="@+id/textViewFrom" />
+
+                <AutoCompleteTextView
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/stationFrom"
+                    android:inputType="textNoSuggestions|textAutoComplete"
+                    android:imeOptions="actionNext"
+                    android:selectAllOnFocus="true"
+                    android:completionThreshold="1" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left" >
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/nach"
+                    android:id="@+id/textViewTo" />
+
+                <AutoCompleteTextView
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/stationTo"
+                    android:inputType="textNoSuggestions|textAutoComplete"
+                    android:imeOptions="actionNext"
+                    android:selectAllOnFocus="true"
+                    android:completionThreshold="1" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnReverse"
+                    android:src="@android:drawable/ic_menu_revert"
+                    android:contentDescription="Reverse Direction" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left" >
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/via"
+                    android:id="@+id/textViewVia" />
+
+                <AutoCompleteTextView
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/stationVia"
+                    android:inputType="textNoSuggestions|textAutoComplete"
+                    android:imeOptions="actionNext"
+                    android:selectAllOnFocus="true"
+                    android:completionThreshold="1" />
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
 
 
     </LinearLayout>
@@ -45,50 +118,8 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" >
-
-        <TextView
-            android:layout_width="35dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/nach"
-            android:id="@+id/textViewTo" />
-
-        <AutoCompleteTextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/stationTo"
-            android:inputType="textNoSuggestions|textAutoComplete"
-            android:layout_weight="1"
-            android:imeOptions="actionNext"
-            android:selectAllOnFocus="true"
-            android:completionThreshold="1" />
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" >
-
-        <TextView
-            android:layout_width="35dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/via"
-            android:id="@+id/textViewVia" />
-
-        <AutoCompleteTextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/stationVia"
-            android:inputType="textNoSuggestions|textAutoComplete"
-            android:layout_weight="1"
-            android:imeOptions="actionNext"
-            android:selectAllOnFocus="true"
-            android:completionThreshold="1" />
+        android:id="@+id/spacer1"
+        android:minHeight="40dp">
 
     </LinearLayout>
 
@@ -117,27 +148,12 @@
             android:text="@string/btnTimeDefaultText"
             android:id="@+id/btnTime" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spacer1"
-        android:minHeight="40dp">
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
+        <Button
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
+            android:text="@string/suche"
+            android:id="@+id/btnSearch"/>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/suche"
-                android:id="@+id/btnSearch"/>
-        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

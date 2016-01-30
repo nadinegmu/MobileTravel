@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
@@ -157,6 +158,21 @@ public class MainActivity extends AppCompatActivity {
               }
           }
         );
+
+        ImageButton btnReverseDirection = (ImageButton) findViewById(R.id.btnReverse);
+        btnReverseDirection.setOnClickListener(new View.OnClickListener() {
+                                                   @Override
+                                                   public void onClick(View v) {
+           reverseDirections();
+                                                   }
+                                               }
+        );
+    }
+
+    private void reverseDirections() {
+        String buffer = autoTxtViewTo.getText().toString();
+        autoTxtViewTo.setText(autoTxtViewFrom.getText());
+        autoTxtViewFrom.setText(buffer);
     }
 
     @Override
