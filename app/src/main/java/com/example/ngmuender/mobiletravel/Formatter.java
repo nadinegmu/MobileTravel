@@ -5,38 +5,42 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 public class Formatter {
+
+    public static String TIMEZONE_CET = "CET";
+
     private GregorianCalendar cal = new GregorianCalendar();
 
-    public String getCurrentDate() {
-        return formatDateToString(new Date());
+    SimpleDateFormat dateFormat = new SimpleDateFormat ("dd.MM.yyyy");
+    SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+    SimpleDateFormat transportTimeFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+
+    public Formatter() {
+        // could probably be set in emulator
+        dateFormat.setTimeZone(TimeZone.getTimeZone(TIMEZONE_CET));
+        timeFormat.setTimeZone(TimeZone.getTimeZone(TIMEZONE_CET));
+        transportTimeFormat.setTimeZone(TimeZone.getTimeZone(TIMEZONE_CET));
     }
-    public String getCurrentTime() {
-        return formatDateToTimeString(new Date());
-    }
+
     public String formatDateStringToTimeString(String timestamp) {
 
         return formatDateToTimeString(timestamp); }
 
     public String formatDateToString(Date date) {
-        SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy");
-        return ft.format(date);
+        return dateFormat.format(date);
     }
 
     public String formatDateToTimeString(Date date) {
-        SimpleDateFormat ft = new SimpleDateFormat ("HH:mm");
-        return ft.format(date);
+        return timeFormat.format(date);
     }
     private String formatDateToTimeString(String date) {
-        if (date == null) {
-            return null;
-        }
-        SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd'T'HH:mm:ssZ");
-        String localPattern = ft.toLocalizedPattern();
+
+        String localPattern = transportTimeFormat.toLocalizedPattern();
         Date d = null;
         try {
-            d = ft.parse(date);
+            d = transportTimeFormat.parse(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }

@@ -126,14 +126,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ToggleButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/togBtnDepArr"
-            android:textOn="@string/btnArrivalsText"
-            android:textOff="@string/btnDepartureText" />
+        android:layout_height="wrap_content"
+        android:weightSum="1">
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -147,6 +141,29 @@
             android:layout_height="match_parent"
             android:text="@string/btnTimeDefaultText"
             android:id="@+id/btnTime" />
+
+        <ImageButton
+            android:layout_width="42dp"
+            android:layout_height="50dp"
+            android:id="@+id/btnRefresh"
+            android:src="@mipmap/ic_refresh"
+            android:layout_weight="0.08" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/togBtnDepArr"
+            android:textOn="@string/btnArrivalsText"
+            android:textOff="@string/btnDepartureText" />
 
         <Button
             android:layout_width="wrap_content"

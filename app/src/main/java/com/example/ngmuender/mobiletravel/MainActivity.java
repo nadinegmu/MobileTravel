@@ -26,6 +26,7 @@ import android.widget.ToggleButton;
 import com.example.ngmuender.mobiletravel.dummy.ConnectionsRequest;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import ch.schoeb.opendatatransport.IOpenTransportRepository;
 import ch.schoeb.opendatatransport.OpenTransportRepositoryFactory;
@@ -47,13 +48,14 @@ public class MainActivity extends AppCompatActivity {
     public ArrayList<String> proposalStations;
     public String searchString;
 
-
-    private Formatter dateformatter = new Formatter();
+    private Formatter formatter = new Formatter();
     private Button btnDate;
     private Button btnTime;
+    private ImageButton btnRefresh;
     private ToggleButton btnToggle;
     private boolean isArrivalTime = false;
 
+    Date currentDate = new Date();
     private Button btnSearch;
 
     public IOpenTransportRepository repo;
@@ -69,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         btnDate = (Button) findViewById(R.id.btnDate);
         btnDate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -80,6 +83,15 @@ public class MainActivity extends AppCompatActivity {
         btnTime.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setBtnTime();
+            }
+        });
+
+        setDateTime(currentDate);
+
+        btnRefresh = (ImageButton) findViewById(R.id.btnRefresh);
+        btnRefresh.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                refresh();
             }
         });
 
@@ -169,6 +181,17 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
+    private void setDateTime(Date date) {
+        btnDate.setText(formatter.formatDateToString(date));
+        btnTime.setText(formatter.formatDateToTimeString(date));
+    }
+
+    private void refresh() {
+        currentDate = new Date();
+        setDateTime(currentDate);
+
+    }
+
     private void reverseDirections() {
         String buffer = autoTxtViewTo.getText().toString();
         autoTxtViewTo.setText(autoTxtViewFrom.getText());
@@ -208,9 +231,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view,
                                           int year, int monthOfYear, int dayOfMonth) {
-                        btnDate.setText(dateformatter.GetDateFormat(dayOfMonth, monthOfYear, year));
+                        btnDate.setText(formatter.GetDateFormat(dayOfMonth, monthOfYear, year));
                     }
-                }, dateformatter.GetYear(), dateformatter.GetMonth(), dateformatter.GetDay());
+                }, formatter.GetYear(), formatter.GetMonth(), formatter.GetDay());
         datePicker.show();
     }
 
@@ -224,7 +247,7 @@ public class MainActivity extends AppCompatActivity {
                         btnTime.setText(newTimeString);
 
                     }
-                }, dateformatter.GetHour(), dateformatter.GetMinute(), true);
+                }, formatter.GetHour(), formatter.GetMinute(), true);
         timePicker.show();
     }
 
